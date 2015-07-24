@@ -21,7 +21,7 @@ let Squire = React.createClass({
 			});;
 		switch (type) {
 			case 0: 
-				return <div className={className}>{this.props.content} </div>;
+				return <div className={className}>{this.props.content}</div>;
 				break;
 			case 1:
 				return <div className={className}>{this.props.content}</div>;
@@ -45,7 +45,8 @@ let Squire = React.createClass({
 let Pagination = React.createClass({
 	PropTypes: {
 		total: React.PropTypes.number,
-		curIdx: React.PropTypes.number
+		curIdx: React.PropTypes.number,
+		onSwitch: function() {}
 	},
 	getInitialState () {
 		return {
