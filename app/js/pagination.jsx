@@ -21,7 +21,7 @@ let Squire = React.createClass({
 			});;
 		switch (type) {
 			case 0: 
-				return <div className={className}>{this.props.content}</div>;
+				return <div className={className}>{this.props.content} </div>;
 				break;
 			case 1:
 				return <div className={className}>{this.props.content}</div>;
@@ -87,12 +87,26 @@ let Pagination = React.createClass({
 		squires.push({content: '下一页', type: 4});
 
 		return squires;
+	},
 
+	handleClick (event) {
+		let textContent = event.target.textContent,
+			value = parseInt(textContent),
+			{total, curIdx} = this.state;
+
+		if (value !== NaN && value >= 1 && value <= total) {
+			this.setState({curIdx: value});
+		} else if (textContent === '<' && curIdx > 1) {
+			this.setState({curIdx: this.state.curIdx - 1});
+		} else if (textContent === '下一页' && curIdx < total) {
+			this.setState({curIdx: this.state.curIdx + 1});
+		}
 	},
 
 	render () {
 		let squires = this.getSquires(),
-			result;
+			result,
+			self = this;
 
 		result = squires.map((sq) => {
 				let {type, content} = sq;
@@ -100,7 +114,7 @@ let Pagination = React.createClass({
 		});
 
 		return (
-			<div>
+			<div onClick={this.handleClick}>
 				{result}
 			</div>
 		)
